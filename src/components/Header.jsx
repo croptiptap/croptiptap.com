@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import logo1 from '../assets/logo-1.png'
 
 const Header = () => {
@@ -15,15 +15,9 @@ const Header = () => {
                 height: 80,
             }}
         >
-            <Typography
-                variant="h4"
-                sx={{
-                    color: '#fff',
-                    fontWeight: 700,
-                }}
-            >
+            <Link to="/">
                 <Box component="img" src={logo1} alt="logo" sx={{ height: '20px' }} />
-            </Typography>
+            </Link>
         </Stack>
     )
 }

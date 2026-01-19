@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 
 import Home from './pages/Home'
+import Grant from './pages/Grant'
 import NotFound from './pages/NotFound'
 
 import Header from './components/Header'
@@ -21,6 +22,7 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/grant" element={<Grant />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
 
