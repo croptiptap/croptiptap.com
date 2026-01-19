@@ -14,7 +14,6 @@ import Footer from './components/Footer'
 
 import '@fontsource-variable/montserrat';
 
-import { GAProvider } from './providers/GAProvider'
 
 ReactGA.initialize([
   {
@@ -38,20 +37,18 @@ function Tracker() {
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <GAProvider>
-        <CssBaseline />
-        <HashRouter>
-          <Tracker />
-          <Header />
+      <CssBaseline />
+      <HashRouter>
+        <Tracker />
+        <Header />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
 
-          <Footer />
-        </HashRouter>
-      </GAProvider>
+        <Footer />
+      </HashRouter>
     </ThemeProvider>
   )
 }
