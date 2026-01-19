@@ -390,6 +390,7 @@ const Home = () => {
               href="https://manifest.network"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Learn more about Manifest Network (opens in new window)"
               sx={{
                 color: '#fff',
                 fontWeight: 600,

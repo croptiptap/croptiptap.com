@@ -70,6 +70,7 @@ const Footer = () => {
               href="https://manifest.network"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Manifest Network (opens in new window)"
               variant="body2"
               sx={linkStyles}
             >

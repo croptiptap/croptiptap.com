@@ -49,8 +49,15 @@ const Grant = () => {
       } else {
         setError(data.message || 'Something went wrong. Please try again.')
       }
-    } catch {
-      setError('Failed to submit. Please check your connection and try again.')
+    } catch (err) {
+      console.error('Form submission error:', err)
+      if (err.message?.includes('HTTP error')) {
+        setError('Server error. Please try again later.')
+      } else if (err.name === 'TypeError' || err.message?.includes('fetch')) {
+        setError('Network error. Please check your connection and try again.')
+      } else {
+        setError('Failed to submit. Please try again.')
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -122,6 +129,7 @@ const Grant = () => {
               href="https://manifest.network"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Learn more about Manifest Network (opens in new window)"
               sx={{
                 color: 'accent.main',
                 fontWeight: 600,
@@ -161,7 +169,11 @@ const Grant = () => {
                 Your grant application has been submitted successfully! We&apos;ll review your proposal and get back to you soon.
               </Alert>
               <Button
-                onClick={() => setSubmitted(false)}
+                onClick={() => {
+                  setSubmitted(false)
+                  setDescriptionLength(0)
+                  setGrantUsageLength(0)
+                }}
                 variant="outlined"
                 sx={{
                   color: 'accent.main',
@@ -207,8 +219,8 @@ const Grant = () => {
               <input type="hidden" name="access_key" value={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY} />
               <input type="hidden" name="subject" value="New Grant Application" />
               <input type="hidden" name="from_name" value="Manifest Grant Form" />
-              {/* Honeypot spam protection */}
-              <Box component="input" type="checkbox" name="botcheck" sx={{ display: 'none' }} />
+              {/* Honeypot spam protection - obscure name to avoid detection */}
+              <Box component="input" type="text" name="company_website_url" autoComplete="off" tabIndex={-1} sx={{ display: 'none' }} />
 
               <Stack spacing={3}>
                 <TextField
@@ -238,7 +250,11 @@ const Grant = () => {
                   label="Email"
                   name="email"
                   placeholder="your@email.com"
-                  inputProps={{ maxLength: 254 }}
+                  inputProps={{
+                    maxLength: 254,
+                    pattern: '[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}',
+                    title: 'Please enter a valid email address (e.g., name@example.com)',
+                  }}
                   sx={textFieldStyles}
                 />
 
@@ -247,12 +263,17 @@ const Grant = () => {
                   fullWidth
                   multiline
                   rows={4}
+                  id="project-description"
                   label="Project Description"
                   name="project_description"
                   placeholder="Describe your project, its goals, and what problem it solves"
-                  inputProps={{ maxLength: 1000 }}
+                  inputProps={{
+                    maxLength: 1000,
+                    'aria-describedby': 'project-description-helper-text',
+                  }}
                   onChange={(e) => setDescriptionLength(e.target.value.length)}
                   helperText={`${descriptionLength}/1000 characters`}
+                  FormHelperTextProps={{ id: 'project-description-helper-text' }}
                   sx={{
                     ...textFieldStyles,
                     '& .MuiFormHelperText-root': {
@@ -267,12 +288,17 @@ const Grant = () => {
                   fullWidth
                   multiline
                   rows={3}
+                  id="grant-usage"
                   label="How do you plan to use the grant?"
                   name="grant_usage"
                   placeholder="Describe how you will use the tokens (e.g., CPU, storage, GPU resources needed)"
-                  inputProps={{ maxLength: 500 }}
+                  inputProps={{
+                    maxLength: 500,
+                    'aria-describedby': 'grant-usage-helper-text',
+                  }}
                   onChange={(e) => setGrantUsageLength(e.target.value.length)}
                   helperText={`${grantUsageLength}/500 characters`}
+                  FormHelperTextProps={{ id: 'grant-usage-helper-text' }}
                   sx={{
                     ...textFieldStyles,
                     '& .MuiFormHelperText-root': {
@@ -294,11 +320,16 @@ const Grant = () => {
 
                 <TextField
                   fullWidth
+                  id="links"
                   label="Links (GitHub, Website, etc.)"
                   name="links"
                   placeholder="https://github.com/yourproject, https://yourwebsite.com"
-                  inputProps={{ maxLength: 500 }}
+                  inputProps={{
+                    maxLength: 500,
+                    'aria-describedby': 'links-helper-text',
+                  }}
                   helperText="Enter full URLs separated by commas (e.g., https://...)"
+                  FormHelperTextProps={{ id: 'links-helper-text' }}
                   sx={{
                     ...textFieldStyles,
                     '& .MuiFormHelperText-root': {

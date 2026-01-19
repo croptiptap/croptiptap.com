@@ -15,21 +15,23 @@ const Header = () => {
                 height: 80,
             }}
         >
-            <Link
+            <Box
+                component={Link}
                 to="/"
                 aria-label="Croptiptap Studio - Go to homepage"
-                style={{
+                sx={{
                     display: 'flex',
                     alignItems: 'center',
                     cursor: 'pointer',
                     opacity: 1,
                     transition: 'opacity 0.2s ease',
+                    '&:hover': {
+                        opacity: 0.7,
+                    },
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
                 <Box component="img" src={logo1} alt="Croptiptap Studio logo" sx={{ height: '20px' }} />
-            </Link>
+            </Box>
         </Stack>
     )
 }
