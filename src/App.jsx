@@ -1,8 +1,6 @@
-import React from 'react'
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-import ReactGA from 'react-ga4'
 
 import theme from './theme'
 
@@ -12,34 +10,13 @@ import NotFound from './pages/NotFound'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-import '@fontsource-variable/montserrat';
-
-
-ReactGA.initialize([
-  {
-    trackingId: 'G-XXXXXXXXXX',
-  },
-])
-
-function Tracker() {
-  const location = useLocation()
-
-  React.useEffect(() => {
-    ReactGA.send({
-      hitType: 'pageview',
-      page: location.pathname + location.search,
-    })
-  }, [location])
-
-  return null
-}
+import '@fontsource-variable/montserrat'
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <HashRouter>
-        <Tracker />
         <Header />
 
         <Routes>

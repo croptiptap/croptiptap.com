@@ -17,7 +17,6 @@ This is a React 19 landing page application using Vite 7 as the build tool.
 - React 19 with React Router 7 (HashRouter for static hosting compatibility)
 - Material-UI (MUI) for components
 - Emotion for CSS-in-JS styling
-- React GA4 for Google Analytics integration
 
 **Path Alias:** `@` maps to `/src`
 
@@ -29,8 +28,6 @@ This is a React 19 landing page application using Vite 7 as the build tool.
 **Theme Colors:**
 - Primary: black (#000), Secondary: white (#fff), Accent: cyan (#00ccff)
 - Custom background palette: dark, dark2, medium, light
-
-**Analytics:** GA4 is initialized in App.jsx with automatic page view tracking on route changes.
 
 ## Code Style
 
