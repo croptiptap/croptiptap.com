@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import logo1 from '../assets/logo-1.png'
 
 const Header = () => {
@@ -15,15 +15,23 @@ const Header = () => {
                 height: 80,
             }}
         >
-            <Typography
-                variant="h4"
+            <Box
+                component={Link}
+                to="/"
+                aria-label="Croptiptap Studio - Go to homepage"
                 sx={{
-                    color: '#fff',
-                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    opacity: 1,
+                    transition: 'opacity 0.2s ease',
+                    '&:hover': {
+                        opacity: 0.7,
+                    },
                 }}
             >
-                <Box component="img" src={logo1} alt="logo" sx={{ height: '20px' }} />
-            </Typography>
+                <Box component="img" src={logo1} alt="Croptiptap Studio logo" sx={{ height: '20px' }} />
+            </Box>
         </Stack>
     )
 }

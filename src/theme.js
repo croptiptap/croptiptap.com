@@ -9,6 +9,7 @@ const colors = {
   },
   accent: {
     main: '#00ccff',
+    hover: '#00b8e6',
   },
   background: {
     dark: '#010609',

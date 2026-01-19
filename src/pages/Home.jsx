@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Container, Typography, Stack, Button } from '@mui/material';
 import logo3 from '../assets/logo-3.png';
 import ParticlesBackground from '../components/ParticlesBackground';
@@ -7,6 +9,10 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'Croptiptap Studio | Web3 Infrastructure';
+  }, []);
+
   return (
     <Box>
       {/* Hero Section */}
@@ -48,19 +54,39 @@ const Home = () => {
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
               <Button
-                component="a"
-                href="mailto:hello@croptiptap.com"
+                component={Link}
+                to="/grant"
                 variant="contained"
                 size="large"
                 sx={{
-                  bgcolor: '#fff',
-                  color: '#667eea',
+                  bgcolor: 'accent.main',
+                  color: '#000',
                   fontWeight: 600,
                   px: 4,
                   py: 1.5,
                   fontSize: '1.1rem',
                   '&:hover': {
-                    bgcolor: '#f0f0f0',
+                    bgcolor: 'accent.hover',
+                  },
+                }}
+              >
+                Apply for Grant
+              </Button>
+              <Button
+                component="a"
+                href="mailto:hello@croptiptap.com"
+                variant="outlined"
+                size="large"
+                sx={{
+                  borderColor: '#fff',
+                  color: '#fff',
+                  fontWeight: 600,
+                  px: 4,
+                  py: 1.5,
+                  fontSize: '1.1rem',
+                  '&:hover': {
+                    bgcolor: 'rgba(255, 255, 255, 0.1)',
+                    borderColor: '#fff',
                   },
                 }}
               >
@@ -313,6 +339,88 @@ const Home = () => {
                 </Box>
               </Box>
             </Stack>
+          </Stack>
+        </Container>
+      </Box>
+
+      {/* Grant CTA Section */}
+      <Box
+        sx={{
+          py: { xs: 8, md: 12 },
+          backgroundColor: 'background.medium',
+        }}
+      >
+        <Container maxWidth="md">
+          <Stack
+            spacing={4}
+            alignItems="center"
+            textAlign="center"
+            sx={{
+              p: { xs: 4, md: 6 },
+              borderRadius: 3,
+              border: '2px solid',
+              borderColor: 'accent.main',
+              bgcolor: 'background.dark',
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: 700,
+                color: 'accent.main',
+                fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.75rem' },
+              }}
+            >
+              Build on Manifest Network
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#fff',
+                fontWeight: 400,
+                fontSize: { xs: '1rem', sm: '1.15rem' },
+                lineHeight: 1.8,
+                maxWidth: '700px',
+              }}
+            >
+              Apply for token grants to lease decentralized infrastructure—CPU, storage, GPU, and more. We&apos;re looking for builders creating innovative solutions on the Manifest Network.
+            </Typography>
+            <Typography
+              component="a"
+              href="https://manifest.network"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Learn more about Manifest Network (opens in new window)"
+              sx={{
+                color: '#fff',
+                fontWeight: 600,
+                textDecoration: 'none',
+                '&:hover': {
+                  textDecoration: 'underline',
+                },
+              }}
+            >
+              Learn more about Manifest Network →
+            </Typography>
+            <Button
+              component={Link}
+              to="/grant"
+              variant="contained"
+              size="large"
+              sx={{
+                bgcolor: 'accent.main',
+                color: '#000',
+                fontWeight: 600,
+                px: 5,
+                py: 1.5,
+                fontSize: '1.1rem',
+                '&:hover': {
+                  bgcolor: 'accent.hover',
+                },
+              }}
+            >
+              Apply for Grant
+            </Button>
           </Stack>
         </Container>
       </Box>
