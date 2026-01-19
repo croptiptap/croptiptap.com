@@ -54,7 +54,7 @@ export default function NotFound() {
           color: '#000',
           fontWeight: 600,
           '&:hover': {
-            bgcolor: '#00b8e6',
+            bgcolor: 'accent.hover',
           },
         }}
       >

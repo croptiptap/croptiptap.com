@@ -35,6 +35,10 @@ const Grant = () => {
         body: formData,
       })
 
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
+      }
+
       const data = await response.json()
 
       if (data.success) {
@@ -43,7 +47,7 @@ const Grant = () => {
         setGrantUsageLength(0)
         e.target.reset()
       } else {
-        setError('Something went wrong. Please try again.')
+        setError(data.message || 'Something went wrong. Please try again.')
       }
     } catch {
       setError('Failed to submit. Please check your connection and try again.')
@@ -200,11 +204,11 @@ const Grant = () => {
               )}
 
               {/* Web3Forms hidden fields */}
-              <input type="hidden" name="access_key" value="be2dba32-88c3-4ff2-8f70-0c93ca5e8c4f" />
+              <input type="hidden" name="access_key" value={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY} />
               <input type="hidden" name="subject" value="New Grant Application" />
               <input type="hidden" name="from_name" value="Manifest Grant Form" />
               {/* Honeypot spam protection */}
-              <input type="checkbox" name="botcheck" style={{ display: 'none' }} />
+              <Box component="input" type="checkbox" name="botcheck" sx={{ display: 'none' }} />
 
               <Stack spacing={3}>
                 <TextField
@@ -294,7 +298,13 @@ const Grant = () => {
                   name="links"
                   placeholder="https://github.com/yourproject, https://yourwebsite.com"
                   inputProps={{ maxLength: 500 }}
-                  sx={textFieldStyles}
+                  helperText="Enter full URLs separated by commas (e.g., https://...)"
+                  sx={{
+                    ...textFieldStyles,
+                    '& .MuiFormHelperText-root': {
+                      color: 'rgba(255, 255, 255, 0.6)',
+                    },
+                  }}
                 />
 
                 <TextField
@@ -319,7 +329,7 @@ const Grant = () => {
                     py: 1.5,
                     fontSize: '1.1rem',
                     '&:hover': {
-                      bgcolor: '#00b8e6',
+                      bgcolor: 'accent.hover',
                     },
                     '&.Mui-disabled': {
                       bgcolor: 'rgba(0, 204, 255, 0.5)',

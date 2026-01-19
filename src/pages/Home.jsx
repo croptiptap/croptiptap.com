@@ -66,7 +66,7 @@ const Home = () => {
                   py: 1.5,
                   fontSize: '1.1rem',
                   '&:hover': {
-                    bgcolor: '#00b8e6',
+                    bgcolor: 'accent.hover',
                   },
                 }}
               >
@@ -414,7 +414,7 @@ const Home = () => {
                 py: 1.5,
                 fontSize: '1.1rem',
                 '&:hover': {
-                  bgcolor: '#00b8e6',
+                  bgcolor: 'accent.hover',
                 },
               }}
             >
